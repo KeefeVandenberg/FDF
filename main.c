@@ -6,55 +6,11 @@
 /*   By: kvandenb <kvandenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 15:24:31 by kvandenb          #+#    #+#             */
-/*   Updated: 2017/12/07 19:03:21 by kvandenb         ###   ########.fr       */
+/*   Updated: 2017/12/07 19:34:28 by kvandenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-/*int fuckbitch(void)
-{
-	void *mlx;
-	void *win;
-	int x;
-	int y;
-	int hex;
-
-	mlx = mlx_init();
-	y = 100;
-	hex = 0x00AAAAAA;
-	win = mlx_new_window(mlx, 800, 800, "mlx 42");
-	while (y < 701)
-	{
-		x = 100;
-		if (y % 100 == 0)
-		{
-			while(x < 701)
-			{
-				mlx_pixel_put(mlx, win, x, y, hex);
-				x++;
-			}
-		}
-		y++;
-	}
-	x = 100;
-	while (x < 701)
-	{
-		y = 100;
-		if (x % 100 == 0)
-		{
-			while (y < 701)
-			{
-				mlx_pixel_put(mlx, win, x, y, hex);
-				y++;
-			}
-		}
-		x++;
-	}
-	mlx_loop(mlx);
-	return (0);
-}
-*/
 
 t_plc *parse(t_plc *current, char *str, int y, int x)
 {
