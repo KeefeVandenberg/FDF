@@ -6,7 +6,7 @@
 /*   By: kvandenb <kvandenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 15:24:31 by kvandenb          #+#    #+#             */
-/*   Updated: 2017/12/07 19:34:28 by kvandenb         ###   ########.fr       */
+/*   Updated: 2017/12/11 16:19:19 by kvandenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_plc *parse(t_plc *current, char *str, int y, int x)
 	while (str[0] != '\0' && ((str[0] >= '0' && str[0] <= '9') || str[0] == ' '))
 	{
 		while(str[0] >= '0' && str[0] <= '9')
-			str++;		
+			str++;
 		while(str[0] == ' ')
 			str++;
 		if(!(new->next = (t_plc *)malloc(sizeof(t_plc))))
@@ -31,12 +31,28 @@ t_plc *parse(t_plc *current, char *str, int y, int x)
 		new->x = x++;
 		new->y = y;
 		new->z = ft_atoi(str);
-		printf("x = %d y = %d z = %d\n\n", new->x, y, ft_atoi(str));
+		//printf("x = %d y = %d z = %d\n\n", new->x, y, ft_atoi(str));
 		last = new;
 		new = new->next;
 		new->last = last;
 	}
 	return (current);
+}
+
+void print_struct(t_plc *first)
+{
+	t_plc *new;
+	int i;
+
+	i = 0;
+	new = first;
+	while (new->next)
+	{
+		printf("x = %d y = %d z = %d\n", new->x, new->y, new->z);
+		printf("struct number = %d\n\n", i);
+		new = new->next;
+		i++;
+	}
 }
 
 int main(int argc, char **argv)
@@ -57,6 +73,8 @@ int main(int argc, char **argv)
 			y++;
 			line = NULL;
 		}
+		print_struct(start);
+		close(fd);
 	}
 	return (0);
 }
