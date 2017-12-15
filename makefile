@@ -6,7 +6,7 @@
 #    By: kvandenb <kvandenb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/04 14:08:37 by kvandenb          #+#    #+#              #
-#    Updated: 2017/12/06 16:48:40 by kvandenb         ###   ########.fr        #
+#    Updated: 2017/12/12 17:13:49 by kvandenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ header = fdf.h
 
 includes = ./GNL/libft/libft.a ./GNL/get_next_line.c
 
-SRC = main.c init_plc.c
+SRC = main.c init_plc.c utils.c
 
 OBJ = *.o
 
