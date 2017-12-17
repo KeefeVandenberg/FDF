@@ -6,27 +6,11 @@
 /*   By: kvandenb <kvandenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 15:24:31 by kvandenb          #+#    #+#             */
-/*   Updated: 2017/12/13 19:00:08 by kvandenb         ###   ########.fr       */
+/*   Updated: 2017/12/16 18:22:03 by kvandenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void print_struct(t_plc *first)
-{
-	t_plc *new;
-	int i;
-
-	i = 1;
-	new = first;
-	while (new->next)
-	{
-		printf("x = %d y = %d z = %d\n", new->x, new->y, new->z);
-		printf("struct number = %d\n\n", i);
-		new = new->next;
-		i++;
-	}
-}
 
 int put_t_plc(t_plc *first, char *str, int y, int x)
 {
