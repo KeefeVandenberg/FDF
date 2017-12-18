@@ -6,7 +6,7 @@
 /*   By: kvandenb <kvandenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 15:24:31 by kvandenb          #+#    #+#             */
-/*   Updated: 2017/12/16 18:22:03 by kvandenb         ###   ########.fr       */
+/*   Updated: 2017/12/17 17:02:00 by kvandenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,20 @@ int main(int argc, char **argv)
 	int fd;
 	char *line;
 	t_plc *start;
+	t_cam *cam;
 	int y;
 
 	y = 0;
 	start = init_plc();
+	cam = init_cam();
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
 		while (get_next_line(fd, &line) != 0)
 		{
-			parse(start, line, y, 0);
-			y++;
+			parse(start, line, y++, 0);
 			line = NULL;
 		}
-		print_struct(start);
 		close(fd);
 	}
 	free_plc(start);

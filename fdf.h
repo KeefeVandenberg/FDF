@@ -6,7 +6,7 @@
 /*   By: kvandenb <kvandenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 14:43:30 by kvandenb          #+#    #+#             */
-/*   Updated: 2017/12/16 19:47:24 by kvandenb         ###   ########.fr       */
+/*   Updated: 2017/12/17 17:02:26 by kvandenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ typedef struct      s_cam
     int             offset_x;
     int             offset_y;
     double          angle_x;
+    double          radian_x;
     double          angle_y;
+    double          radian_y;
     double          angle_z;
+    double          radian_z;
 }                   t_cam;
 
 typedef struct      s_rot
@@ -54,11 +57,13 @@ typedef struct      s_rot
 	double          z0;
 	double          z1;
 	double          z2;
-}
+}                   t_rot;
 
 t_plc *init_plc(void);
 t_plc *parse(t_plc *current, char *str, int y, int x);
 int main(int argc, char **argv);
 int	ft_intlen(int num);
+t_plc *find_points(t_cam *cam, t_plc *cur);
+t_cam *init_cam(void);
 
 #endif
