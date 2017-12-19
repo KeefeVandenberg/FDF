@@ -6,7 +6,7 @@
 /*   By: kvandenb <kvandenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 15:24:31 by kvandenb          #+#    #+#             */
-/*   Updated: 2017/12/17 17:02:00 by kvandenb         ###   ########.fr       */
+/*   Updated: 2017/12/18 19:20:45 by kvandenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,14 @@ t_plc *free_plc(t_plc *current)
 	return (current);
 }
 
+
 int main(int argc, char **argv)
 {
 	int fd;
 	char *line;
 	t_plc *start;
 	t_cam *cam;
+	t_all *fatcunt;
 	int y;
 
 	y = 0;
@@ -91,6 +93,10 @@ int main(int argc, char **argv)
 		}
 		close(fd);
 	}
+	reinit_cam(cam);
+	do_find_points(cam, start);
+	fatcunt = init_all(cam, start);
+	mlx_looper(fatcunt);
 	free_plc(start);
 	return (0);
 }

@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: kvandenb <kvandenb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/04 14:08:37 by kvandenb          #+#    #+#              #
-#    Updated: 2017/12/12 17:13:49 by kvandenb         ###   ########.fr        #
+#    Updated: 2017/12/18 18:16:01 by kvandenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ header = fdf.h
 
 includes = ./GNL/libft/libft.a ./GNL/get_next_line.c
 
-SRC = main.c init_plc.c utils.c
+SRC = main.c init.c utils.c draw_loop.c generate.c
 
 OBJ = *.o
 
@@ -34,7 +34,7 @@ $(name) :
 	@printf '\033[32m[ 🤖 ] %s\n\033[0m' "Making FdF"
 	@make -C GNL/libft/
 	$(cc) $(libx_flags) -g $(SRC) $(includes) -o $(name)
-	@printf '\033[32m[ 🧐 ] %s\n\033[0m' "Create FdF"
+	@printf '\033[32m[ 🧐 ] %s\n\033[0m' "Created FdF"
 clean:
 	@make -C GNL/libft/ clean
 	@/bin/rm -f $(name)
