@@ -6,7 +6,7 @@
 /*   By: kvandenb <kvandenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 14:53:59 by kvandenb          #+#    #+#             */
-/*   Updated: 2017/12/18 19:56:04 by kvandenb         ###   ########.fr       */
+/*   Updated: 2017/12/19 16:59:33 by kvandenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,13 @@ int		ft_intlen(int num)
 	}
 }
 
-t_plc *find_struct(t_plc *head, int x_cord, int y_cord)
-{
-	t_plc *new;
-
-	new = head;
-	if (!(x_cord >= 0 || y_cord >= 0))
-		return(NULL);
-	while(new->next)
-	{
-		if (new->x == x_cord && new->y == y_cord)
-			return(new);
-		new = new->next;
-	}
-	return(NULL);
-}
-
-t_plc *do_find_points(t_cam *cam, t_plc *current)
+t_plc	*do_find_points(t_cam *cam, t_plc *current)
 {
 	t_plc *header;
 	t_plc *last;
 
 	header = current;
-	while(header->next != NULL)
+	while (header->next != NULL)
 	{
 		header = find_points(cam, header);
 		last = header;
@@ -83,10 +67,10 @@ t_plc *do_find_points(t_cam *cam, t_plc *current)
 	return (current);
 }
 
-t_plc *find_points(t_cam *cam, t_plc *current)
+t_plc	*find_points(t_cam *cam, t_plc *current)
 {
-	t_rot *alg;
-	t_plc *cur;
+	t_rot	*alg;
+	t_plc	*cur;
 
 	cur = current;
 	alg = (t_rot *)malloc(sizeof(t_rot));
@@ -98,46 +82,37 @@ t_plc *find_points(t_cam *cam, t_plc *current)
 	alg->z1 = (alg->z0 * cos(cam->angle_y)) + (alg->x0 * sin(cam->angle_y));
 	alg->x2 = (alg->x1 * cos(cam->angle_z)) + (alg->y1 * sin(cam->angle_z));
 	alg->y2 = (alg->y1 * cos(cam->angle_z)) - (alg->x1 * sin(cam->angle_z));
-	alg->x2 *= 20;
-	alg->y2 *= 20;
-	alg->x2 += 200;
-	alg->y2 += 200;
+	alg->x2 *= 10;
+	alg->y2 *= 10;
+	alg->x2 += 150;
+	alg->y2 += 150;
 	cur->x_place = (int)alg->x2;
 	cur->y_place = (int)alg->y2;
 	free(alg);
 	return (cur);
 }
 
-int draw(t_all *all)
+int		draw(t_all *all)
 {
-	t_plc 	*a;
+	t_plc	*a;
 	t_plc	*down;
-	int 	x[1];
+	int		x[1];
 	int		y[1];
 
 	a = all->head;
 	down = find_struct(a, a->x, a->y + 1);
 	while (a->next)
 	{
-		if(down->next != NULL && (down->next->x > down->x))
-			coord_calc(a, down, all->mlx);	
-		if(a->next && (a->next->x > a->x))
+		if (down->next != NULL && (down->next->x > down->x))
+			coord_calc(a, down, all->mlx);
+		if (a->next && (a->next->x > a->x))
 			coord_calc(a, a->next, all->mlx);
-		if(a->next != NULL)
+		if (a->next->x < a->x && down->next != NULL)
+			coord_calc(a, down, all->mlx);
+		if (a->next != NULL)
 			a = a->next;
 		if (down->next != NULL)
 			down = down->next;
 	}
-	return(0);
-}
-
-void ft_exit(int i)
-{
-	if (i == 1)
-	{
-		ft_putstr("EXITED PROGRAM SUCCESSFULLY");
-	}
-	else
-		ft_putstr("ERROR");
-	exit(1);
+	return (0);
 }

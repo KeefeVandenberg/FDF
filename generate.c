@@ -5,61 +5,89 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kvandenb <kvandenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/15 19:20:15 by bhalderm          #+#    #+#             */
-/*   Updated: 2017/12/18 19:56:41 by kvandenb         ###   ########.fr       */
+/*   Created: 2017/12/15 19:20:15 by kvandenb          #+#    #+#             */
+/*   Updated: 2017/12/19 13:51:56 by kvandenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void    draw_horizon(int y_base, int x1, int x2, t_mlx *mlx)
+void	draw_yaxis(t_plc *start, t_plc *end, t_position *line, t_mlx *mlx)
 {
-    while (x1 <= x2)
-    {
-        mlx_pixel_put(mlx->mlx, mlx->window, x1, y_base, 0xFFFFFF);
-        x1++;
-    }
+	int				e;
+	int				slope;
+	unsigned int	x;
+	unsigned int	y;
+
+	x = start->x_place;
+	y = start->y_place;
+	e = 2 * line->dx - line->dy;
+	if (x < (int)end->x_place)
+		slope = 1;
+	else
+		slope = -1;
+	while (y < (int)end->y_place)
+	{
+		mlx_pixel_put(mlx->mlx, mlx->window, x, y, 0xFFFFFF);
+		if (e < 0)
+			e += 2 * line->dx;
+		else
+		{
+			x += slope;
+			e += 2 * (line->dx - line->dy);
+		}
+		y++;
+	}
 }
 
-void    draw_vertic(int x_base, int y1, int y2, t_mlx *mlx)
+void	draw_xaxis(t_plc *start, t_plc *end, t_position *line, t_mlx *mlx)
 {
-    while (y1 <= y2)
-    {
-        mlx_pixel_put(mlx->mlx, mlx->window, x_base, y1, 0xFFFFFF);
-        y1++;
-    }
+	int				e;
+	int				slope;
+	unsigned int	x;
+	unsigned int	y;
+
+	x = start->x_place;
+	y = start->y_place;
+	e = 2 * line->dy - line->dx;
+	if (y < (int)end->y_place)
+		slope = 1;
+	else
+		slope = -1;
+	while (x < (int)end->x_place)
+	{
+		mlx_pixel_put(mlx->mlx, mlx->window, x, y, 0xFFFFFF);
+		if (e < 0)
+			e += 2 * line->dy;
+		else
+		{
+			y += slope;
+			e += 2 * (line->dy - line->dx);
+		}
+		x++;
+	}
 }
 
-void    generate(int x1, int x2, int y1, int y2, t_mlx *mlx)
+void	coord_calc(t_plc *start, t_plc *end, t_mlx *mlx)
 {
-    int sx;
-    int sy;
-    int e;
+	t_position	*line;
 
-    sx = x2 - x1;
-    sy = y2 - y1;
-    e = sy - sx;
-
-    while (x1 <= x2)
-    {
-        //mlx_pixel_put(mlx->mlx, mlx->window, x1, y1, 0xFFFFFF);
-        if (e >= 0)
-        {
-            y1 += 1;
-            e += sx;
-        }
-        else
-            e -= sy;
-        x1++;
-    }
-}
-
-void    coord_calc(t_plc *start, t_plc *end, t_mlx *mlx)
-{
-    if (start->x_place == end->x_place)
-        draw_vertic(start->x_place, start->y_place, end->y_place, mlx);
-    if (start->y_place == end->y_place)
-        draw_horizon(start->y_place, start->x_place, end->x_place, mlx);
-    else
-        generate(start->x_place, start->y_place, end->x_place, end->y_place, mlx);
+	if (!(line = malloc(sizeof(t_position))))
+		return ;
+	line->dx = fabs((double)start->x_place - end->x_place);
+	line->dy = fabs((double)start->y_place - end->y_place);
+	if (line->dx > line->dy)
+	{
+		if (start->x_place > end->x_place)
+			draw_xaxis(end, start, line, mlx);
+		else
+			draw_xaxis(start, end, line, mlx);
+	}
+	else
+	{
+		if (start->y_place > end->y_place)
+			draw_yaxis(end, start, line, mlx);
+		else
+			draw_yaxis(start, end, line, mlx);
+	}
 }
