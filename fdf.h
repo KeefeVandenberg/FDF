@@ -6,7 +6,7 @@
 /*   By: kvandenb <kvandenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/04 14:43:30 by kvandenb          #+#    #+#             */
-/*   Updated: 2017/12/19 16:51:50 by kvandenb         ###   ########.fr       */
+/*   Updated: 2017/12/19 17:02:46 by kvandenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include "GNL/libft/libft.h"
 # include "GNL/get_next_line.h"
 # include "math.h"
-# include "stdio.h"
 
 typedef struct		s_plc
 {
@@ -102,5 +101,6 @@ void				coord_calc(t_plc *start, t_plc *end, t_mlx *mlx);
 t_mlx				*init_mlx(void);
 t_plc				*free_plc(t_plc *current);
 t_read				*init_read(void);
+t_plc				*find_struct(t_plc *head, int x_cord, int y_cord);
 
 #endif
